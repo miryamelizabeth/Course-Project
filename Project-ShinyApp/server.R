@@ -10,10 +10,11 @@
 library(shiny)
 library(data.table)
 library(rpart)
+library(rmarkdown)
 
 
 # Read data
-dataset <- read.csv(file="spotify_dataset.csv", sep=',')
+dataset <- read.csv(file="https://raw.githubusercontent.com/miryamelizabeth/datasets/main/spotify_dataset.csv", sep=',')
 dataset <- dataset[, c('artist', 'danceability', 'energy', 'key', 'loudness', 'mode', 'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo', 'duration_min', 'class')]
 
 data <- dataset[, c('acousticness', 'danceability', 'energy', 'instrumentalness', 'speechiness', 'valence', 'class')] #'loudness', 'mode',  'liveness', 'tempo', 'key',
@@ -21,10 +22,10 @@ data <- dataset[, c('acousticness', 'danceability', 'energy', 'instrumentalness'
 
 # Save model to RDS file
 model <- rpart(class ~., data = data)
-saveRDS(model, "model.rds")
+#saveRDS(model, "model.rds")
 
 # Read in the RF model
-model <- readRDS("model.rds")
+#model <- readRDS("model.rds")
 
 
 

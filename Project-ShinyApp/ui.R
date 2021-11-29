@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+library(rmarkdown)
 
 
 # Define UI for application that draws a histogram

@@ -4,4 +4,4 @@ An interactive app to easily explore music of Spofity. The app utilizes a custom
 
 Each song has different attributes such as name, artist, duration, and music-related features such as energy, instrumentality, tempo, how danceable it is, etc.
 
-- More information on the Spotify's API can be found [here](href='https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features'>)
+- More information on the Spotify's API can be found [here](https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features)
