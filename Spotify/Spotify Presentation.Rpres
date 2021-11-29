@@ -1,0 +1,101 @@
+Spotify Presentation
+========================================================
+author: Miryam Elizabeth
+date: 28 november, 2021
+autosize: true
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(reticulate)  
+knitr::knit_engines$set(python = reticulate::eng_python)  
+
+
+# conda_create("proyecto", python_version = 3.8)
+# conda_list()
+# use_condaenv("/home/rstudio/.local/share/r-miniconda/envs/proyecto")
+# py_install(packages = c("pandas","matplotlib"), python_version = 3.8)
+# py_run_string('import pandas as pd')
+# py_run_string('import matplotlib.pyplot as plt')
+
+```
+
+
+Spotify Music
+========================================================
+
+An interactive app to easily explore music of Spofity. The app utilizes a custom dataset, which was collected using Spotify's API. The idea is to predict whether you will like a song or not, based on your musical preferences.
+
+Each song has different attributes such as name, artist, duration, and music-related features such as energy, instrumentality, tempo, how danceable it is, etc.
+
+- More information on the Spotify's API can be found <a href='https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features'>here</a>.
+
+
+Dataset
+========================================================
+
+The first 100 rows of the data being explored.
+
+```{r, echo=FALSE}
+library(data.table)
+
+dataset <- read.csv(file="https://raw.githubusercontent.com/miryamelizabeth/datasets/main/spotify_dataset.csv", sep=',')
+dataset <- dataset[, c('artist', 'danceability', 'energy', 'speechiness', 'acousticness', 'instrumentalness', 'valence', 'class')]
+
+
+library(knitr)
+library(kableExtra)
+kable(dataset[sample(nrow(dataset), 100), ], "html",align = "c") %>%
+  kable_styling(font_size = 18, position = "center") %>%
+  scroll_box(width = "1000px", height = "500px")
+
+
+```
+
+
+Dataset
+========================================================
+
+In the following images you can see the top 5 artists belonging to the Yes class (left) and the top 5 artists belonging to the No class (right).
+
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({'font.size': 22})
+plt.rcParams["figure.figsize"] = (20, 10)
+
+dataset = pd.read_csv('https://raw.githubusercontent.com/miryamelizabeth/datasets/main/spotify_dataset.csv')
+
+good = dataset[dataset['class'] == 'yes']
+bad = dataset[dataset['class'] == 'no']
+
+plt.subplot(1, 2, 1) # row 1, col 2 index 1
+good.groupby(['artist'])['id'].count().sort_values(ascending=False)[:5].plot(kind='pie')
+
+plt.subplot(1, 2, 2) # index 2
+bad.groupby(['artist'])['id'].count().sort_values(ascending=False)[:5].plot(kind='pie')
+
+plt.show()
+```
+
+
+As future work, we intend to include this type of visual analysis within the app, so that the user can explore its content.
+
+
+Dataset
+========================================================
+
+The application makes use of the numerical attributes obtained from each song to predict whether a person will like a song or not. To achieve this, a decision tree was used.
+
+<center><img src="App.PNG" alt="App"></center>
+
+
+App
+========================================================
+
+To use the Music Spotify app please, click [here](https://www.google.com).
+
+To view the source code of the project, please head to [github](https://www.google.com).
+
+Thanks!
