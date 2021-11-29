@@ -1,0 +1,13 @@
+name: Project-ShinyApp
+title: Project-ShinyApp
+username:
+account: miryamelizabeth
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5220710
+bundleId: 5303228
+url: https://miryamelizabeth.shinyapps.io/Project-ShinyApp/
+when: 1638153421.30074
+lastSyncTime: 1638153421.30074
+asMultiple: FALSE
+asStatic: FALSE
